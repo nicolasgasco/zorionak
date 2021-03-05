@@ -22,6 +22,11 @@ const colors = {
         darkAccent: "#56423D",
         lightAccent: "#BEA6A0",
     },
+    "negro": {
+        mainColor: "#000000",
+        darkAccent: "#677381",
+        lightAccent: "#A3CFCD",
+    },
 };
 
 // Create username list
@@ -35,13 +40,31 @@ for ( let userName of userNames ) {
         `
 }
 
+
+// Celebrate user
+const confirmUserButton = document.querySelector("#confirm-user");
+console.log(confirmUserButton)
+const textInHeader = document.querySelector("#header-text");
+
+confirmUserButton.onclick = function () {
+    const chosenUser = selectUserForm.value;
+
+    textInHeader.innerHTML =
+    `
+    <h1>Zorionak ${chosenUser.charAt(0).toUpperCase() + chosenUser.substring(1)}!!!</h1>
+
+    `
+};
+
+
+
+
 // Create color list
 const selectColorForm = document.querySelector("#select-color");
 
 const arrayColors = Object.keys(colors).sort();
 
 for ( let colorName of arrayColors ) {
-    console.log(colorName)
     selectColorForm.innerHTML +=
     `
     <option value=${colorName}>${colorName.charAt(0).toUpperCase() + colorName.substring(1)}</option>
@@ -56,7 +79,7 @@ confirmColorButton.onclick = function () {
         for ( let element of mainAccentColor ) {
             element.style.backgroundColor = colors[selectColorForm.value.toLowerCase()].darkAccent;
         }
-    }
+    };
 
 
 
