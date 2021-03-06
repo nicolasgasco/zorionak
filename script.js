@@ -87,10 +87,9 @@ function showPresents() {
     document.querySelector("#no-present").onclick = (function () {
         window.alert("Eres una persona horrible :(");
     })
-    document.querySelector("#yes-present").onclick = (function () {
-        receiveRandomInsult();
-    })
+    document.querySelector("#yes-present").onclick = receiveRandomInsult;
 }
+
 
 function receiveRandomInsult() {
     const introDiv = document.querySelector("#div-intro");
@@ -100,10 +99,14 @@ function receiveRandomInsult() {
     <p>Quieres recibir un insulto en ingles?</p>
     <button id="yes-insult">Si</p>
     <button id="no-insult">No</p>
+    <br>
+    <button id="following-present">Siguiente regalo</p>
     `
     document.querySelector("#no-insult").onclick = (function () {
         window.alert("Eres una persona horrible :(");
     })
+    document.querySelector("#following-present").onclick = whatRMCharacterAreYou;
+
     document.querySelector("#yes-insult").onclick = (function () {
         fetch("https://www.foaas.com/operations").then( function(response) {
             return response.json();
@@ -126,12 +129,48 @@ function receiveRandomInsult() {
                 <q>${data.message}</q>
                 <p>${data.subtitle}</p>
                 `
+                
+
+
             })
         })
     })
 }
 
-function fetchRandomInsult() {
+function whatRMCharacterAreYou() {
+    const introDiv = document.querySelector("#div-intro");
+
+    introDiv.innerHTML =
+        `
+        <p>Quieres saber que personaje de Rick and Morty serias?</p>
+        <button id="yes-rm">Si</p>
+        <button id="no-rm">No</p>
+        <br>
+        <button id="ciao">Siguiente regalo</p>
+        `
+    document.querySelector("#no-rm").onclick = (function () {
+        window.alert("Eres una persona horrible :(");
+    })
+
+    document.querySelector("#yes-rm").onclick = (function () {
+        fetch("https://rickandmortyapi.com/api/character/").then( function (response) {
+            return response.json();
+        }).then( function (data) {
+            let randomCharacterIndex = Math.floor(Math.random() * data.info.count)
+
+            fetch(`https://rickandmortyapi.com/api/character/${randomCharacterIndex}`).then( function (response) {
+                return response.json();
+            }).then( function (data) {
+
+                document.querySelector("#show-content").innerHTML =
+                `
+                <h2>${data.name}</h2>
+                <img src=${data.image} alt="Picture of ${data.name}" style="width:95%">
+                `
+            })
+        })
+
+    })
 
 }
 

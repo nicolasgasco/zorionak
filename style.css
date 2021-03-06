@@ -4,7 +4,7 @@ body {
 
 * {
     box-sizing: border-box;
-    outline: 1px red solid;
+    /* outline: 1px red solid; */
 }
 
 #main-header {
@@ -55,7 +55,7 @@ main {
 }
 
 #show-content {
-    height: 40vh;
+
 }
 
 /*=======================
