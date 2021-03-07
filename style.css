@@ -5,7 +5,8 @@
 }
 
 body {
-    margin: 0 auto;
+    margin: 0;
+    max-width: 100%;
     position: relative;
     min-height: 100vh;
 
@@ -13,7 +14,8 @@ body {
 }
 
 main {
-    max-width: 60vw;
+    width: 90%;
+    max-width: 1000px;
     margin: auto;
     padding: 3rem;
     padding-bottom: 5rem;
