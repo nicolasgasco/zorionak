@@ -80,7 +80,7 @@ function celebrateUser() {
             document.querySelector("#appearing-gifs").remove();
 
             }
-            , 3500)
+            , 3000)
         
         showPresents();
 
