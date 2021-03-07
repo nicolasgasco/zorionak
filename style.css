@@ -1,6 +1,7 @@
 * {
     outline: 2px solid red;
     box-sizing: border-box;
+    font-size: 1.1rem;
 }
 
 
@@ -57,7 +58,8 @@ main {
 
 
 #div-intro, #show-content {
-    padding: 2rem;
+    padding: 1.5rem;
+    width: 95%;
 
   
 }
@@ -65,14 +67,12 @@ main {
 #div-intro {
     margin: 0 auto;
     margin-bottom: 2rem;
-    width: 95%;
     
 }
 
 #show-content {
     display: none;
     margin: 0 auto;
-    width: 95vw;
 }
 
 footer {

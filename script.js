@@ -119,36 +119,29 @@ function receiveRandomInsult() {
     document.querySelector("#next-present").onclick = whatRMCharacterAreYou;
 
     document.querySelector("#yes-insult").onclick = (function () {
-        fetch("https://www.foaas.com/operations").then( function(response) {
+        let usersWithoutChosenUser = userNames.filter(user => user !== chosenUser);                    
+        let randomUser = usersWithoutChosenUser[Math.floor(Math.random() * usersWithoutChosenUser.length)];
+        let insultTypes = ["/off/", "/nugget/", "/donut/", "/fewer/", "/cocksplat/", "/king/", "/blackadder/", "/bday/", "/outside/"]
+        
+        let randomInsultToFetch = insultTypes[Math.floor(Math.random() * insultTypes.length)]
+
+        fetch(`https://www.foaas.com${randomInsultToFetch}${capitalizeName(chosenUser)}/${capitalizeName(randomUser)}`, { headers: {"Accept": "application/json"}}).then( function(response) {
             return response.json();
         }).then( function(data) {
-            let usersWithoutChosenUser = userNames.filter(user => user !== chosenUser)
+            
+            
+            document.querySelector("#show-content").innerHTML =
+            `
+            <q>${data.message}</q>
+            <p>${data.subtitle}</p>
+            <p>${randomInsultToFetch.url}</p>
+            <small style="display:block">Dale otra vez a Sí, si quieres.</small>
+            `
 
-            data = data.filter(insult => insult.url.slice(-11) === ":name/:from");
-                    
-            let randomUser = usersWithoutChosenUser[Math.floor(Math.random() * usersWithoutChosenUser.length)]
-            let randomInsultToFetch = data[Math.floor(Math.random() * data.length)]
+            document.querySelector("#show-content").style.display = "block";
 
-            let urlRandomInsult = randomInsultToFetch.url.replace(":name", capitalizeName(chosenUser)).replace(":from", capitalizeName(randomUser));
+            
 
-            fetch(`https://www.foaas.com${urlRandomInsult}`, { headers: {"Accept": "application/json"}}).then( function(response) {
-                return response.json();
-            }).then( function(data) {
-                
-                
-                document.querySelector("#show-content").innerHTML =
-                `
-                <q>${data.message}</q>
-                <p>${data.subtitle}</p>
-                <br>
-                <small>Dale otra vez a Sí, si quieres.</small>
-                `
-
-                document.querySelector("#show-content").style.display = "block";
-
-                
-
-            })
         })
     })
 }
@@ -187,7 +180,7 @@ function whatRMCharacterAreYou() {
                 `
                 <h2>${data.name}</h2>
                 <img src=${data.image} alt="Picture of ${data.name}" style="width:90%; border-radius:5px">
-                <small>Dale otra vez a Si, si quieres</small>
+                <small style="display:block">Dale otra vez a Si, si quieres</small>
                 `
 
                 document.querySelector("#show-content").style.display = "block";
