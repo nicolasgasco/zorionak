@@ -57,7 +57,7 @@ function celebrateUser() {
     selectUserForm.onchange = function () {
         chosenUser = selectUserForm.value;
 
-        textInHeader.innerText = `Zorionak ${chosenUser.charAt(0).toUpperCase() + chosenUser.substring(1)}!!!`
+        textInHeader.innerText = `Zorionak ${chosenUser.charAt(0).toUpperCase() + chosenUser.substring(1)}!`
         document.querySelector("#header-text").style.visibility = "visible";
         document.querySelector("#main-header").style.display = "block";
         document.querySelector("#color-theme-choice").style.display = "block";
